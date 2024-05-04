@@ -10,6 +10,9 @@ custom:
     bundle: true
     minify: true	
 
+package:
+  excludeDevDependencies: true
+
 provider:
   name: aws
   runtime: nodejs16.x

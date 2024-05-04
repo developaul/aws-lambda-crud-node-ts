@@ -1,4 +1,5 @@
 export const swapiTranslations = {
+  title: 'titulo',
   name: 'nombre',
   height: 'altura',
   mass: 'masa',
@@ -60,7 +61,10 @@ export const swapiTranslations = {
   pilots: 'pilotos',
   creado: 'creado',
   editado: 'editado',
+  vehicle_class: 'clase_vehiculo'
 };
+
+export const swapiTranslationsValues = Object.values(swapiTranslations)
 
 export const swapiEntities = [
   "films",
@@ -72,3 +76,5 @@ export const swapiEntities = [
 ]
 
 export const BASE_SWAPI_API = 'https://swapi.py4e.com/api'
+
+export const BASE_SERVER_API = 'http://localhost:3000'
