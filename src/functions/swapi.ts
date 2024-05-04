@@ -1,9 +1,11 @@
-import { getSwapiInfo } from "../utils/api";
-import { translateSWAPIModel } from "../utils/translate";
-import { isValidSwapiEntity } from "../utils/validation";
+import { APIGatewayProxyHandler } from 'aws-lambda'
 
-module.exports.handler = async (event: any) => {
-  const { id, entity } = event.pathParameters
+import { translateSWAPIModel } from "../utils/translate"
+import { isValidSwapiEntity } from "../utils/validation"
+import { getSwapiInfo } from "../utils/api"
+
+export const handler: APIGatewayProxyHandler = async (event) => {
+  const { id, entity } = event.pathParameters as { id?: string, entity: string }
 
   if (!isValidSwapiEntity(entity)) return {
     statusCode: 400,

@@ -2,7 +2,7 @@ service: aws-lambda-crud-node
 frameworkVersion: '3'
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-esbuild
   - serverless-offline
 
 provider:
@@ -30,4 +30,7 @@ functions:
                 entity: true
                 id: true
 
-	
+custom:
+  esbuild:
+    bundle: true
+    minify: true	

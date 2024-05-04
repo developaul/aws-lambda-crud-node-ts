@@ -1,7 +1,15 @@
 {
+  "name": "aws-lambda-crud-node",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "sls offline",
+    "deploy": "sls deploy"
+  },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.137",
+    "esbuild": "^0.20.2",
+    "serverless-esbuild": "^1.52.1",
     "serverless-offline": "^13.5.0",
-    "serverless-plugin-typescript": "^2.1.5",
     "typescript": "^5.4.5"
   }
 }
