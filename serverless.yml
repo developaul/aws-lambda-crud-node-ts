@@ -42,7 +42,7 @@ resources:
 
 functions:
   swapi:
-    handler: src/functions/swapi.handler
+    handler: src/routes/swapi.handler
     events:
       - httpApi:
           path: /api/swapi/{entity}
@@ -51,31 +51,31 @@ functions:
           path: /api/swapi/{entity}/{id}
           method: get
   addTask:
-    handler: src/functions/addTask.handler
+    handler: src/routes/addTask.handler
     events:
       - httpApi:
           path: /api/tasks
           method: post
   getTasks:
-    handler: src/functions/getTasks.handler
+    handler: src/routes/getTasks.handler
     events:
       - httpApi:
           path: /api/tasks
           method: get
   getTask:
-    handler: src/functions/getTask.handler
+    handler: src/routes/getTask.handler
     events:
       - httpApi:
           path: /api/tasks/{id}
           method: get
   updateTask:
-    handler: src/functions/updateTask.handler
+    handler: src/routes/updateTask.handler
     events:
       - httpApi:
           path: /api/tasks/{id}
           method: put
   deleteTask:
-    handler: src/functions/deleteTask.handler
+    handler: src/routes/deleteTask.handler
     events:
       - httpApi:
           path: /api/tasks/{id}
