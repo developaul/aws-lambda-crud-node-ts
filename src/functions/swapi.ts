@@ -9,7 +9,7 @@ module.exports.handler = async (event: any) => {
     statusCode: 400,
     body: JSON.stringify(
       {
-        message: 'La entidad no es válida'
+        detalle: 'Wrong entity'
       },
       null,
       2
