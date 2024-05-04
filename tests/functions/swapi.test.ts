@@ -5,9 +5,11 @@ import { BASE_SERVER_API, swapiEntities, swapiTranslationsValues } from '../../s
 
 describe('GET /api/swapi module', () => {
   test('should respond with a 200 status code', async () => {
-    const response = await request(BASE_SERVER_API).get('/api/swapi/films').send()
+    for (const swapiEntity of swapiEntities) {
+      const response = await request(BASE_SERVER_API).get(`/api/swapi/${swapiEntity}`).send()
 
-    expect(response.statusCode).toBe(200)
+      expect(response.statusCode).toBe(200)
+    }
   });
 
   test('should respond with translated properties', async () => {
