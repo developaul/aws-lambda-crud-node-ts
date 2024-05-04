@@ -14,7 +14,7 @@ export const updateTask = async ({ id, updates }: UpdateTaskArgs) => {
   const updatedAt = new Date()
 
   const updateExpressionParts: string[] = [];
-  const expressionAttributeValues: Record<string, any> = {
+  const expressionAttributeValues: Record<string, Date | string | boolean> = {
     ':updatedAt': updatedAt
   };
 

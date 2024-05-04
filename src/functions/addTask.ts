@@ -33,7 +33,7 @@ export const handler: APIGatewayProxyHandler = async ({ body }) => {
       statusCode: 201,
       body: JSON.stringify(newTask),
     };
-  } catch (error) {
+  } catch (error: any) {
     return getRespond({ statusCode: 500, message: error.message })
   }
 };

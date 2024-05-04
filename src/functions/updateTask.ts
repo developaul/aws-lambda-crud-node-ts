@@ -18,7 +18,7 @@ export const handler: APIGatewayProxyHandler = async ({ pathParameters, body }) 
 
     return getRespond({ statusCode: 200, message: 'Task updated successfully' })
 
-  } catch (error) {
+  } catch (error: any) {
     return getRespond({ statusCode: 500, message: error.message })
   }
 };

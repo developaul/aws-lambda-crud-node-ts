@@ -19,7 +19,7 @@ export const handler: APIGatewayProxyHandler = async ({ pathParameters }) => {
       statusCode: 200,
       body: JSON.stringify(task),
     };
-  } catch (error) {
+  } catch (error: any) {
     return getRespond({ statusCode: 500, message: error.message })
   }
 };

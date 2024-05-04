@@ -17,7 +17,7 @@ export const handler: APIGatewayProxyHandler = async ({ pathParameters }) => {
     }).promise()
 
     return getRespond({ statusCode: 200, message: 'Task deleted successfully' })
-  } catch (error) {
+  } catch (error: any) {
     return getRespond({ statusCode: 500, message: error.message })
   }
 };

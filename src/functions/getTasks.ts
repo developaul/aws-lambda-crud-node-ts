@@ -11,7 +11,7 @@ export const handler = async () => {
       statusCode: 200,
       body: JSON.stringify(tasks),
     };
-  } catch (error) {
+  } catch (error: any) {
     return getRespond({ statusCode: 500, message: error.message })
   }
 };
