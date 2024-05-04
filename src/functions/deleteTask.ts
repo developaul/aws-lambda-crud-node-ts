@@ -11,6 +11,10 @@ export const handler: APIGatewayProxyHandler = async ({ pathParameters }) => {
 
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
+    const { Item: task } = await dynamodb.get({ TableName: "TaskTable", Key: { id } }).promise()
+
+    if (!task) return getRespond({ statusCode: 400, message: 'Task not found' })
+
     await dynamodb.delete({
       TableName: 'TaskTable',
       Key: { id },

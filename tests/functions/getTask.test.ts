@@ -3,19 +3,24 @@ import request from 'supertest'
 
 import { BASE_SERVER_API } from '../../src/utils/constant';
 
-describe('POST /api/tasks module', () => {
-  test('should respond with a 201 status code', async () => {
+describe('GET /api/tasks/{id} module', () => {
+  test('should respond with a 200 status code', async () => {
     const createRespond = await request(BASE_SERVER_API).post('/api/tasks').send({ title: 'Test task', description: 'Just a test' })
     expect(createRespond.statusCode).toBe(201)
 
     const { body: task } = createRespond
-    const deleteResponse = await request(BASE_SERVER_API).delete(`/api/tasks/${task.id}`).send()
+    const response = await request(BASE_SERVER_API).get(`/api/tasks/${task.id}`)
+    expect(response.statusCode).toBe(200)
+
+    const deleteResponse = await request(BASE_SERVER_API).delete(`/api/tasks/${task.id}`)
     expect(deleteResponse.statusCode).toBe(200)
   });
 
   test('Should respond with a 400 status code', async () => {
-    const createRespond = await request(BASE_SERVER_API).post('/api/tasks').send({ description: 'Just a test error' })
-    expect(createRespond.statusCode).toBe(400)
+    const deleteResponse = await request(BASE_SERVER_API).get('/api/tasks/fakeId')
+
+    expect(deleteResponse.statusCode).toBe(400)
   });
+
 });
 

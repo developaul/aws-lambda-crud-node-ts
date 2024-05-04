@@ -13,7 +13,7 @@ export const updateTask = async ({ id, updates }: UpdateTaskArgs) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient();
   const updatedAt = new Date()
 
-  const updateExpressionParts: string[] = [];
+  const updateExpressionParts: string[] = ['updatedAt = :updatedAt'];
   const expressionAttributeValues: Record<string, Date | string | boolean> = {
     ':updatedAt': updatedAt
   };
