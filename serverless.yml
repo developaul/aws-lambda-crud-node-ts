@@ -5,32 +5,66 @@ plugins:
   - serverless-esbuild
   - serverless-offline
 
+custom:
+  esbuild:
+    bundle: true
+    minify: true	
+
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x
   region: us-east-1
+  iamRoleStatements:
+      - Effect: "Allow"        
+        Action:
+          - dynamodb:*        
+        Resource: 
+          - arn:aws:dynamodb:us-east-1:975049906602:table/TaskTable
+	
+resources:
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TaskTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
 
 functions:
-  api:
+  swapi:
     handler: src/functions/swapi.handler
     events:
       - httpApi:
-          path: /api/{entity}
+          path: /api/swapi/{entity}
           method: get
           request: 
             parameters: 
               paths: 
                 entity: true
       - httpApi:
-          path: /api/{entity}/{id}
+          path: /api/swapi/{entity}/{id}
           method: get
           request: 
             parameters: 
               paths: 
                 entity: true
                 id: true
-
-custom:
-  esbuild:
-    bundle: true
-    minify: true	
+  addTask:
+    handler: src/functions/addTask.handler
+    events:
+      - httpApi:
+          path: /api/task
+          method: post
+  getTask:
+    handler: src/functions/getTask.handler
+    events:
+      - httpApi:
+          path: /api/task
+          method: get
+ 
+  
