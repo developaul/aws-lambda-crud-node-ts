@@ -1,4 +1,4 @@
-export const translations = {
+export const swapiTranslations = {
   name: 'nombre',
   height: 'altura',
   mass: 'masa',

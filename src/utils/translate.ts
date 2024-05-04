@@ -1,4 +1,4 @@
-import { translations } from "./constant";
+import { swapiTranslations } from "./constant";
 
 export const translateSWAPIModel = (object: Record<string, any>) => {
   if (typeof object !== 'object' || object === null) {
@@ -15,7 +15,7 @@ export const translateSWAPIModel = (object: Record<string, any>) => {
   const translatedObject: Record<string, any> = {};
 
   for (const key in object) {
-    const translateKey = translations[key] ?? key;
+    const translateKey = swapiTranslations[key] ?? key;
     translatedObject[translateKey] = translateSWAPIModel(object[key]);
   }
 
