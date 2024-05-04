@@ -1,25 +1,17 @@
 import DataSource from './DataSource'
 
-import { BASE_SWAPI_API } from '../utils/constant'
 import { ResolveArgs } from '../interfaces/swapi'
-
+import { BASE_SWAPI_API } from '../utils/constant'
+import { getResolveUrl } from '../utils/api'
 
 class SwapiAPI extends DataSource {
   constructor() {
     super(BASE_SWAPI_API as string)
   }
 
-  getResolveUrl({ entity, id }: ResolveArgs) {
-    let swapiUrl = `/${entity}`
-
-    if (id) swapiUrl = `${swapiUrl}/${id}`
-
-    return `${swapiUrl}/?format=json`
-  }
-
   async resolve({ entity, id }: ResolveArgs) {
     try {
-      const url = this.getResolveUrl({ entity, id })
+      const url = getResolveUrl({ entity, id })
 
       const response = await this.get<Record<string, any>>(url)
 
