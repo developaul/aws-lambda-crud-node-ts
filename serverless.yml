@@ -1,0 +1,33 @@
+service: aws-lambda-crud-node
+frameworkVersion: '3'
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+functions:
+  api:
+    handler: src/functions/swapi.handler
+    events:
+      - httpApi:
+          path: /api/{entity}
+          method: get
+          request: 
+            parameters: 
+              paths: 
+                entity: true
+      - httpApi:
+          path: /api/{entity}/{id}
+          method: get
+          request: 
+            parameters: 
+              paths: 
+                entity: true
+                id: true
+
+	
