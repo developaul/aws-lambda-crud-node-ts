@@ -42,29 +42,25 @@ functions:
       - httpApi:
           path: /api/swapi/{entity}
           method: get
-          request: 
-            parameters: 
-              paths: 
-                entity: true
       - httpApi:
           path: /api/swapi/{entity}/{id}
           method: get
-          request: 
-            parameters: 
-              paths: 
-                entity: true
-                id: true
   addTask:
     handler: src/functions/addTask.handler
     events:
       - httpApi:
-          path: /api/task
+          path: /api/tasks
           method: post
+  getTasks:
+    handler: src/functions/getTasks.handler
+    events:
+      - httpApi:
+          path: /api/tasks
+          method: get
   getTask:
     handler: src/functions/getTask.handler
     events:
       - httpApi:
-          path: /api/task
+          path: /api/tasks/{id}
           method: get
- 
   
