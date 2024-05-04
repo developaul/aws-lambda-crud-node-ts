@@ -8,11 +8,11 @@ yarn
 
 ## Start development server
 ```
-sls offline
+yarn dev
 ```
 
 # Deploy
 
 ```
-sls deploy
+yarn deploy
 ```
