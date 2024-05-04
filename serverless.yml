@@ -69,4 +69,10 @@ functions:
       - httpApi:
           path: /api/tasks/{id}
           method: put
+  deleteTask:
+    handler: src/functions/deleteTask.handler
+    events:
+      - httpApi:
+          path: /api/tasks/{id}
+          method: delete
   
