@@ -21,3 +21,15 @@ export const getSwapiInfo = async ({ entity, id }: GetSwapiInfo) => {
 
   return json
 }
+
+interface GetErrorRespond {
+  statusCode: number;
+  message: string;
+}
+
+export const getRespond = ({ statusCode, message }: GetErrorRespond) => {
+  return {
+    statusCode,
+    body: JSON.stringify({ message })
+  }
+}

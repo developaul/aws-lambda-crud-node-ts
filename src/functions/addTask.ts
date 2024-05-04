@@ -3,29 +3,37 @@ import AWS from 'aws-sdk'
 import { v4 } from 'uuid'
 
 import { AddTaskBody } from '../interfaces/task';
+import { getRespond } from '../utils/api';
 
-export const handler: APIGatewayProxyHandler = async (event) => {
-  const dynamodb = new AWS.DynamoDB.DocumentClient();
+export const handler: APIGatewayProxyHandler = async ({ body }) => {
+  try {
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-  const { title, description } = JSON.parse(event.body ?? '{}') as AddTaskBody
+    const { title, description } = JSON.parse(body ?? '{}') as AddTaskBody
 
-  const createdAt = new Date()
-  const id = v4()
+    if (!title) return getRespond({ statusCode: 400, message: 'title is required' })
+    if (!description) return getRespond({ statusCode: 400, message: 'description is required' })
 
-  const newTask = {
-    id,
-    createdAt,
-    title,
-    description
+    const createdAt = new Date()
+    const id = v4()
+
+    const newTask = {
+      id,
+      createdAt,
+      title,
+      description
+    }
+
+    await dynamodb.put({
+      TableName: 'TaskTable',
+      Item: newTask,
+    }).promise()
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify(newTask),
+    };
+  } catch (error) {
+    return getRespond({ statusCode: 500, message: error.message })
   }
-
-  await dynamodb.put({
-    TableName: 'TaskTable',
-    Item: newTask,
-  }).promise()
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(newTask),
-  };
 };

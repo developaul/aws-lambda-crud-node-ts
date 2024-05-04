@@ -1,21 +1,25 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import AWS from 'aws-sdk'
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+import { getRespond } from '../utils/api';
 
-  const { id } = event.pathParameters as { id: string }
+export const handler: APIGatewayProxyHandler = async ({ pathParameters }) => {
+  try {
+    const { id } = pathParameters as { id: string }
 
-  const dynamodb = new AWS.DynamoDB.DocumentClient();
+    if (!id) return getRespond({ statusCode: 400, message: 'id is required' })
 
-  const { Item: task } = await dynamodb.get({ TableName: "TaskTable", Key: { id } }).promise()
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-  if (!task) return {
-    statusCode: 400,
-    body: JSON.stringify({ message: "Task not found" })
+    const { Item: task } = await dynamodb.get({ TableName: "TaskTable", Key: { id } }).promise()
+
+    if (!task) return getRespond({ statusCode: 400, message: 'Task not found' })
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(task),
+    };
+  } catch (error) {
+    return getRespond({ statusCode: 500, message: error.message })
   }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(task),
-  };
 };

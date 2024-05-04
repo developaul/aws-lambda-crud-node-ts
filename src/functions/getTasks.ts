@@ -1,12 +1,17 @@
 import AWS from 'aws-sdk'
+import { getRespond } from '../utils/api';
 
 export const handler = async () => {
-  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  try {
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-  const { Items: tasks } = await dynamodb.scan({ TableName: "TaskTable" }).promise()
+    const { Items: tasks } = await dynamodb.scan({ TableName: "TaskTable" }).promise()
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(tasks),
-  };
+    return {
+      statusCode: 200,
+      body: JSON.stringify(tasks),
+    };
+  } catch (error) {
+    return getRespond({ statusCode: 500, message: error.message })
+  }
 };

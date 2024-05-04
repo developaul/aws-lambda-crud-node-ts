@@ -1,28 +1,24 @@
 import { APIGatewayProxyHandler } from 'aws-lambda'
-import AWS from 'aws-sdk'
 
-export const handler: APIGatewayProxyHandler = async (event) => {
-  const { id } = event.pathParameters as { id: string }
-  const { done, title, description } = JSON.parse(event.body ?? '{}')
+import { getRespond } from '../utils/api';
+import { updateTask } from '../utils/task';
 
-  const dynamodb = new AWS.DynamoDB.DocumentClient();
-  const updatedAt = new Date()
+export const handler: APIGatewayProxyHandler = async ({ pathParameters, body }) => {
+  try {
+    const { id } = pathParameters as { id: string }
 
-  await dynamodb.update({
-    TableName: 'TaskTable',
-    Key: { id },
-    UpdateExpression: 'SET done = :done, updatedAt = :updatedAt, title = :title, description = :description',
-    ExpressionAttributeValues: {
-      ':done': done,
-      ':updatedAt': updatedAt,
-      ':title': title,
-      ':description': description
-    },
-    ReturnValues: 'ALL_NEW'
-  }).promise()
+    if (!id) return getRespond({ statusCode: 400, message: 'id is required' })
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'Task updated successfully' }),
-  };
+    const { done, title, description } = JSON.parse(body ?? '{}')
+
+    if (typeof done !== 'boolean' && !title && !description)
+      return getRespond({ statusCode: 400, message: 'No changes provided for update' })
+
+    await updateTask({ id, updates: { description, done, title } })
+
+    return getRespond({ statusCode: 200, message: 'Task updated successfully' })
+
+  } catch (error) {
+    return getRespond({ statusCode: 500, message: error.message })
+  }
 };
