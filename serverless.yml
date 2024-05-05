@@ -24,7 +24,7 @@ provider:
         Action:
           - dynamodb:*        
         Resource: 
-          - arn:aws:dynamodb:us-east-1:975049906602:table/TaskTable
+          - ${env:TABLE_ARN}
 	
 resources:
   Resources:
