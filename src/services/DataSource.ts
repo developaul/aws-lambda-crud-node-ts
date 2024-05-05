@@ -10,7 +10,6 @@ class DataSource {
       this.instance.defaults.headers.common['AuthorizationApp'] = tokenApp
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async post<T>(path: string, params?: any): Promise<T> {
     try {
       const { data } = await this.instance.post(path, params)
@@ -21,7 +20,6 @@ class DataSource {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async get<T>(path: string, params?: any): Promise<T> {
     try {
       const { data } = await this.instance.get(path, params)
@@ -32,7 +30,6 @@ class DataSource {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async put<T>(path: string, params?: any): Promise<T> {
     try {
       const { data } = await this.instance.put(path, params)
