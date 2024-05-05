@@ -15,17 +15,21 @@ This project is a basic CRUD (Create, Read, Update, Delete) application develope
 ```
 yarn 
 ```
-3. Create a `.env` file using the `.env-example` file as a guide. You can copy the `.env-example` file and rename it to `.env`, then fill in the necessary environment variables with appropriate values.
-4. To run the server locally, execute the following command:
+3. Install Serverless globally using the following command:
+```
+npm install -g serverless
+```
+4. Create a `.env` file using the `.env-example` file as a guide. You can copy the `.env-example` file and rename it to `.env`, then fill in the necessary environment variables with appropriate values.
+5. To run the server locally, execute the following command:
 ```
 yarn dev 
 ```
-4. To run tests, use the following command:
+6. To run tests, use the following command:
 
 ```
 yarn test 
 ```
-5. To deploy the project to AWS, execute the following command:
+7. To deploy the project to AWS, execute the following command:
 ```
 yarn deploy
 
