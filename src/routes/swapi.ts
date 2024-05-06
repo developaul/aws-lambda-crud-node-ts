@@ -1,6 +1,5 @@
 import { APIGatewayProxyHandler } from 'aws-lambda'
 
-// import { translateSWAPIModel } from "../utils/translate"
 import { isValidSwapiEntity } from "../utils/validation"
 import { getRespond, } from "../utils/api"
 
