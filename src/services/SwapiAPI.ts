@@ -10,15 +10,11 @@ class SwapiAPI extends DataSource {
   }
 
   async resolve({ entity, id }: ResolveArgs) {
-    try {
-      const url = getResolveUrl({ entity, id })
+    const url = getResolveUrl({ entity, id })
 
-      const response = await this.get<Record<string, any>>(url)
+    const response = await this.get<Record<string, any>>(url)
 
-      return response
-    } catch (error) {
-      throw error
-    }
+    return response
   }
 
 }

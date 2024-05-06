@@ -11,43 +11,27 @@ class DataSource {
   }
 
   async post<T>(path: string, params?: any): Promise<T> {
-    try {
-      const { data } = await this.instance.post(path, params)
+    const { data } = await this.instance.post(path, params)
 
-      return data
-    } catch (error) {
-      throw error
-    }
+    return data
   }
 
   async get<T>(path: string, params?: any): Promise<T> {
-    try {
-      const { data } = await this.instance.get(path, params)
+    const { data } = await this.instance.get(path, params)
 
-      return data
-    } catch (error) {
-      throw error
-    }
+    return data
   }
 
   async put<T>(path: string, params?: any): Promise<T> {
-    try {
-      const { data } = await this.instance.put(path, params)
+    const { data } = await this.instance.put(path, params)
 
-      return data
-    } catch (error) {
-      throw error
-    }
+    return data
   }
 
   async delete<T>(path: string, params: any): Promise<T> {
-    try {
-      const { data } = await this.instance.delete(path, { params })
+    const { data } = await this.instance.delete(path, { params })
 
-      return data
-    } catch (error) {
-      throw error
-    }
+    return data
   }
 }
 
