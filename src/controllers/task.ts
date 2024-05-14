@@ -5,10 +5,10 @@ import { AddTaskBody, UpdateTaskArgs } from '../interfaces/task';
 
 class TaskController {
   async addTask({ title, description }: AddTaskBody) {
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-
     if (!title) throw new Error('title is required')
     if (!description) throw new Error('description is required')
+
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     const createdAt = new Date()
     const id = v4()
